@@ -1,6 +1,7 @@
 class OverworldMap {
     constructor (config) {
         this.gameObjects = config.gameObjects;
+        this.walls = config.walls || {};
 
         this.lowerImage = new Image();
         this.lowerImage.src = config.lowerSrc;
@@ -23,6 +24,23 @@ class OverworldMap {
             utils.withGrid(10.5) - cameraPerson.x,
             utils.withGrid(6) - cameraPerson.y
         );
+    }
+
+    isSpaceTaken(currentX, currentY, direction){
+        const {x,y} = utils.nextPosition(currentX, currentY, direction);
+        return this.walls[`${x},${y}`] || false;
+    }
+
+    mountObjects(){
+        Object.values(this.gameObjects).forEach(o => {
+            o.mount(this);
+        })
+    }
+    addWall(x,y){
+        this.walls[`${x},${y}`] = true;
+    }
+    removeWall(x,y){
+        delete this.walls[`${x},${y}`]
     }
 }
 
