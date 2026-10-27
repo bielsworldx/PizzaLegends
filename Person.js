@@ -2,7 +2,7 @@ class Person extends GameObject {
     constructor(config){
         super(config);
         this.movingProgressRemaining = 0;
-        this.isPlayerControlled = config.isPlayercontrolled || false;
+        this.isPlayerControlled = config.isPlayerControlled || false;
         this.directionUpdate = {
             "up":["y", -1],
             "down":["y", 1],
@@ -16,7 +16,7 @@ class Person extends GameObject {
         this.updatePosition();
         this.updateSprite(state);
         
-        if(this.isPlayercontrolled && this.movingProgressRemaining === 0 && state.arrow){
+        if(this.isPlayerControlled && this.movingProgressRemaining === 0 && state.arrow){
             this.direction = state.arrow;
             this.movingProgressRemaining = 16;
         }
@@ -31,12 +31,12 @@ class Person extends GameObject {
     }
 
     updateSprite(state){
-        if(this.isPlayercontrolled && this.movingProgressRemaining === 0 && !state.arrow){
-            this.updateSprite.setAnimation("idle-"+ this.direction);
+        if(this.isPlayerControlled && this.movingProgressRemaining === 0 && !state.arrow){
+            this.sprite.setAnimation("idle-"+ this.direction);
             return;
         }
         if(this.movingProgressRemaining > 0){
-            this.updateSprite.setAnimation("walk-" + this.direction);
+            this.sprite.setAnimation("walk-" + this.direction);
         }
     }
 }
