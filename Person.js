@@ -23,10 +23,8 @@ class Person extends GameObject {
                     direction: state.arrow
                 })
             }
+            this.updateSprite(state);
         }
-        this.updateSprite(state);
-        
-        
     }
     
     startBehavior(state, behavior){
