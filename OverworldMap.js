@@ -42,6 +42,11 @@ class OverworldMap {
     removeWall(x,y){
         delete this.walls[`${x},${y}`]
     }
+    moveWall(wasX,wasY,direction){
+        this.removeWall(wasX,wasY);
+        const {x,y} = utils.nextPosition(wasX, wasY, direction);
+        this.addWall(x,y);
+    }
 }
 
 window.OverworldMaps = {
@@ -59,6 +64,12 @@ window.OverworldMaps = {
                 y: utils.withGrid(9),
                 src: "/images/characters/people/npc1.png"
             })
+        }, 
+        walls:{
+            [utils.asGridCoord(7,6)]: true,
+            [utils.asGridCoord(8,6)]: true,
+            [utils.asGridCoord(7,7)]: true,
+            [utils.asGridCoord(8,7)]: true,
         }
     },
     Kitchen: {
